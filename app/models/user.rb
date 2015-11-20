@@ -15,9 +15,4 @@ class User
     end
   end
 
-  # Manually set whether the user is a lecturer, overriding the default check
-  #def override_lecturer new_lecturer
-  #  update(:lecturer => new_lecturer)
-  #end
-
 end

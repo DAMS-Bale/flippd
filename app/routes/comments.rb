@@ -1,5 +1,6 @@
 class Flippd < Sinatra::Application
 
+
   before '/comment/new' do
     unless @user
       halt 401, "Error 401, Unauthorised"
@@ -10,11 +11,11 @@ class Flippd < Sinatra::Application
     unless @user
       halt 401, "Error 401, Unauthorised"
     end
-    #@todo Allow the author of comment to edit
     comment = Comment.get(params['id'])
     unless @user.is_lecturer || (comment.user.email == @user.email)
       halt 403, "Error 403, Forbidden"
     end
+    
   end
 
   post '/comment/new' do
