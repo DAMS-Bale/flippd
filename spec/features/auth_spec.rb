@@ -85,16 +85,24 @@ feature "User email tests" do
     student_email = "abaj500@york.ac.uk"
     user = User.new
     user.email = student_email
-    expect(false).to eq user.is_lecturer
+    expect(user.is_lecturer).to eq false
   end
 
   it "checks the lecturer is a lecturer" do
     student_email = "abaj.asdf@york.ac.uk"
     user = User.new
     user.email = student_email
-    expect(true).to eq user.is_lecturer
+    expect(user.is_lecturer).to eq true
   end
 
+  it "lecturers can be manually set" do
+    student_email = "abaj45@york.ac.uk"
+    user = User::create(
+      :email => student_email,
+      :lecturer => true
+    )
+    expect(user.is_lecturer).to eq true
+  end
   #
   # it "Student & Lecturer email authorization" do
   #     lecturer_email = "louis.rowe@york.ac.uk"
