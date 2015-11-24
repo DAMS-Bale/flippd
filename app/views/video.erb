@@ -47,15 +47,18 @@
 
             <div class="input-group">
               <span class="input-group-addon">
-                <i class="fa fa-fw fa-clock-o"></i>
-                Video time
-                <span class="text-muted">(optional)</span>
+                <input type="checkbox" id="getVideoTime"/>
+                <label for="getVideoTime">
+                  Use video time
+                </label>
               </span>
               <input type="number" min="0" max="59" value="0" required
-                name="videoTimeMinutes" class="form-control" />
+                readonly="readonly" name="videoTimeMinutes"
+                id="videoTimeMinutes" class="form-control" />
               <span class="input-group-addon">minutes</span>
               <input type="number" min="0" max="59" value="0" required
-                name="videoTimeSeconds" class="form-control" />
+                readonly="readonly" name="videoTimeSeconds"
+                id="videoTimeSeconds" class="form-control" />
               <span class="input-group-addon">seconds</span>
             </div>
 
@@ -212,4 +215,23 @@
   function stopVideo() {
     player.stopVideo();
   }
+
+  // Check the youtube API, and update the comment's related video time.
+  function updateVideoTime() {
+    if ($("#getVideoTime").is(":checked")) {
+      var time = player.getCurrentTime();
+      $("#videoTimeMinutes").val(Math.floor(time / 60));
+      console.log('videoTime:', Math.ceil(time %60));
+      $("#videoTimeSeconds").val(Math.ceil(time %60));
+    } else {
+      $("#videoTimeMinutes").val(0);
+      $("#videoTimeSeconds").val(0);
+    }
+  };
+
+  window.onload = function() {
+    $(document).ready(function() {
+      setInterval(updateVideoTime, 1000);
+    });
+  };
 </script>
