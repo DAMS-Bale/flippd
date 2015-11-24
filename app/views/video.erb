@@ -92,7 +92,7 @@
         <div class="panel-heading">
           <strong><%=h comment.user.name%></strong>
 
-          <span class="pull-right">
+          <div class="pull-right">
 
             <% if @user and @user.can_edit_comment(comment) %>
 
@@ -119,16 +119,7 @@
               </form>
 
             <% end %>
-
-
-            <% unless comment.videoTime == 0 %>
-              <a onclick="player.seekTo(<%= comment.videoTime %>, true)">
-                <i class="fa fa-fw fa-play"></i>
-                <%= comment.video_time_display%>
-              </a>
-            <% end %>
-
-          </span>
+          </div>
 
         </div>
         <div class="panel-body">
@@ -172,6 +163,12 @@
             <i class="fa fa-fw fa-clock-o"></i>
             Created <%= comment.commentTime.strftime "%d-%m-%Y at %H:%M"%>
 
+            <% unless comment.videoTime == 0 %>
+              <button class="btn btn-info btn-xs pull-right" onclick="player.seekTo(<%= comment.videoTime %>, true)">
+                <i class="fa fa-fw fa-play"></i>
+                <%= comment.video_time_display%>
+              </button>
+            <% end %>
         </div>
 
       </div>
