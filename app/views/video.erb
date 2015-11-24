@@ -122,8 +122,10 @@
 
 
             <% unless comment.videoTime == 0 %>
-              <i class="fa fa-fw fa-play"></i>
-              <%= comment.video_time_display%>
+              <a onclick="player.seekTo(<%= comment.videoTime %>, true)">
+                <i class="fa fa-fw fa-play"></i>
+                <%= comment.video_time_display%>
+              </a>
             <% end %>
 
           </span>
