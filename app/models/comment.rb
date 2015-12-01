@@ -1,3 +1,4 @@
+# A simple linear comment system for each video.
 class Comment
   include DataMapper::Resource
 
