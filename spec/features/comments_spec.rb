@@ -18,7 +18,12 @@ feature "A video page" do
       :videoTime => 90,
     )
 
-    @reply = @original.add_reply @bob, "Hi to u"
+    @reply = Comment::create(
+      :user => @bob,
+      :text => "Hi to u",
+      :videoId => 2,
+      :videoTime => 90
+    )
 
     visit('/videos/2')
   end
@@ -65,8 +70,8 @@ feature "A video page" do
     visit('/videos/2')
     within('#comment-' + @original.id.to_s) do
       click_on "edit time"
-      fill_in ("videoTimeMinutes-" + @original.id.to_s), with: "1"
-      fill_in ("videoTimeSeconds-" + @original.id.to_s), with: "42"
+      fill_in( ("videoTimeMinutes-" + @original.id.to_s), with: "1")
+      fill_in( ("videoTimeSeconds-" + @original.id.to_s), with: "42")
       click_on "Save changes"
     end
     expect(page).to have_content "1m42s"

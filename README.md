@@ -9,3 +9,9 @@ The following files contain more information:
 * [RELEASES.md](RELEASES.md) - lists changes made to Flippd
 * [PROBLEMS.md](PROBLEMS.md) - describes the process for reporting bugs or asking questions about Flippd
 * [DEVELOPING.md](DEVELOPING.md) - describes how to setup your development environment for modifying Flippd
+
+One can perform quality checks by running:
+```shell
+rake quality
+```
+This uses the [Quality tool](https://github.com/apiology/quality).

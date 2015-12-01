@@ -17,15 +17,17 @@ class Comment
   belongs_to :lastEditUser, 'User', required: false
   belongs_to :parent, 'Comment', required: false
 
+  # Not needed for this basic linear structure, instead create new comments for
+  # the video
   # Adds a reply to this comment, and returns the new comment.
-  def add_reply user, text
-    Comment::create(
-      :parent       =>  self,
-      :videoId      =>  @videoId,
-      :text         =>  text,
-      :user         =>  user
-    )
-  end
+  # def add_reply user, text
+  #   Comment::create(
+  #     :parent       =>  self,
+  #     :videoId      =>  @videoId,
+  #     :text         =>  text,
+  #     :user         =>  user
+  #   )
+  # end
 
   # Edits this comment and updates last editor and last edit timestamp
   def edit_comment user, new_text
