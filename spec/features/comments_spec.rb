@@ -49,15 +49,27 @@ feature "A video page" do
     expect(page).to have_content "This is my comment"
   end
 
-  it "allows editing a comment (ui)", :javascript => true do
+  it "allows editing a comment's text (ui)", :javascript => true do
     sign_in_lecturer
     visit('/videos/2')
     within('#comment-' + @original.id.to_s) do
-      click_on "edit"
+      click_on "edit text"
       fill_in "Edit this comment", with: "This is my new text"
-      click_on "Save changes"
+      click_on "Save new text"
     end
     expect(page).to have_content "This is my new text"
+  end
+
+  it "allows editing a comment's time (ui)", :javascript => true do
+    sign_in_lecturer
+    visit('/videos/2')
+    within('#comment-' + @original.id.to_s) do
+      click_on "edit time"
+      fill_in ("videoTimeMinutes-" + @original.id.to_s), with: "1"
+      fill_in ("videoTimeSeconds-" + @original.id.to_s), with: "42"
+      click_on "Save changes"
+    end
+    expect(page).to have_content "1m42s"
   end
 
   it "allows deleteing a comment (ui)" do
