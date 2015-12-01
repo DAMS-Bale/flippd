@@ -1,3 +1,5 @@
+# A user that has logged in to the system, used for authorisation and to
+# present comments' authors.
 class User
   include DataMapper::Resource
 

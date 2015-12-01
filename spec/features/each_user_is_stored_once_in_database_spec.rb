@@ -1,8 +1,9 @@
 # This is a slightly odd feature right now, because we inspect the state of the
 # database to check that results are correct. In a future version of Flippd,
-# perhaps it would make sense to instead provide a view (only for module leaders)
-# that lists all of the users for that VLE. These tests can then be rewritten to
-# inspect the content of a web page rather than reaching into the database.
+# perhaps it would make sense to instead provide a view (only for module
+# leaders) that lists all of the users for that VLE. These tests can then be
+# rewritten to inspect the content of a web page rather than reaching into the
+# database.
 
 feature "Each user is stored once in database" do
   context "after signing in once" do
