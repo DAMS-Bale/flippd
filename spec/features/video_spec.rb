@@ -8,7 +8,8 @@ feature "A video page" do
   end
 
   it "contains the video's description" do
-    expect(page).to have_content 'Introduces RubyGems and Bundler for managing Ruby dependencies.'
+    expect(page).to have_content 'Introduces RubyGems and Bundler for '\
+      'managing Ruby dependencies.'
   end
 
   it "contains navigation links" do
@@ -17,9 +18,11 @@ feature "A video page" do
   end
 
   it "contains links to additional material" do
-    expect(page).to have_link 'Ruby Gems Documentation', href: 'http://guides.rubygems.org'
+    expect(page).to have_link 'Ruby Gems Documentation', \
+      href: 'http://guides.rubygems.org'
     expect(page).to have_link 'Bundler', href: 'http://bundler.io'
-    expect(page).to have_link 'Ruby Toolbox', href: 'https://www.ruby-toolbox.com'
+    expect(page).to have_link 'Ruby Toolbox', \
+      href: 'https://www.ruby-toolbox.com'
   end
 
   context "for the first video" do

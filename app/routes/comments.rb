@@ -23,7 +23,8 @@ class Flippd < Sinatra::Application
 
     @videoTime = nil
     if params[:videoTimeMinutes] && params[:videoTimeSeconds]
-      @videoTime = (params[:videoTimeMinutes].to_i * 60) + params[:videoTimeSeconds].to_i
+      @videoTime = (params[:videoTimeMinutes].to_i * 60) + \
+        params[:videoTimeSeconds].to_i
     end
 
     # Create the new comment

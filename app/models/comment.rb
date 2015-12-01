@@ -5,7 +5,9 @@ class Comment
   property :videoId, Integer, required: true
   property :videoTime, Integer, required: false
   # Using a Lambda to make sure this gets evaluated at creation time
-  property :commentTime, DateTime, required: true, default: lambda{ |p,s| DateTime.now }
+  property :commentTime, DateTime, required: true, default: lambda{
+    |p,s| DateTime.now
+  }
   property :lastEditTime, DateTime, required: false
   property :text, String, length: 1024, required: false
 
