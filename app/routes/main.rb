@@ -31,7 +31,8 @@ class Flippd < Sinatra::Application
   get '/phases/:title' do
     @phase = nil
     @phases.each do |phase|
-      @phase = phase if phase['title'].downcase.gsub(" ", "_") == params['title']
+      @phase = phase if phase['title'].downcase.gsub(" ", "_") == \
+        params['title']
     end
 
     pass unless @phase
@@ -45,6 +46,7 @@ class Flippd < Sinatra::Application
           if video["id"] == params['id'].to_i
             @phase = phase
             @video = video
+            @comments = Comment.all(:videoId => @video["id"])
           end
         end
       end

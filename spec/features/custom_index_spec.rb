@@ -1,4 +1,5 @@
-feature "A custom index page is displayed by rendering ERB from the configuration URL" do
+feature "A custom index page is displayed by rendering ERB from the \
+    configuration URL" do
   before(:each) { visit('/') }
 
   it "renders plain text from the index template" do

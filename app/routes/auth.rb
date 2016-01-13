@@ -3,7 +3,8 @@ require 'omniauth'
 class Flippd < Sinatra::Application
   if ENV['AUTH'] == "GOOGLE"
     require 'omniauth-google-oauth2'
-    use OmniAuth::Strategies::GoogleOauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
+    use OmniAuth::Strategies::GoogleOauth2, ENV['GOOGLE_CLIENT_ID'],\
+      ENV['GOOGLE_CLIENT_SECRET']
     get('/auth/new') { redirect to('/auth/google_oauth2') }
   else
     use OmniAuth::Strategies::Developer
@@ -17,7 +18,11 @@ class Flippd < Sinatra::Application
 
   route :get, :post, '/auth/:provider/callback' do
     auth_hash = env['omniauth.auth']
-    user = User.first_or_create({ email: auth_hash.info.email }, { name: auth_hash.info.name} )
+    user = User.first_or_create({
+      email: auth_hash.info.email
+      }, {
+        name: auth_hash.info.name
+      } )
     session[:user_id] = user.id
 
     origin = env['omniauth.origin'] || '/'
