@@ -1,3 +1,5 @@
+# A user that has logged in to the system, used for authorisation and to
+# present comments' authors.
 class User
   include DataMapper::Resource
 
@@ -13,6 +15,10 @@ class User
     else
       return lecturer
     end
+  end
+
+  def can_edit_comment comment
+    return is_lecturer || comment.user == self
   end
 
 end
