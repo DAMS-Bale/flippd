@@ -211,7 +211,7 @@
             <% unless comment.videoTime == 0 %>
               <a class="btn btn-info btn-xs pull-right" href="#" onclick="player.seekTo(<%= comment.videoTime %>, true)">
                 <i class="fa fa-fw fa-play"></i>
-                <%= comment.video_time_display%>
+                <%= comment.videoTime%> seconds
               </a>
             <% end %>
         </div>

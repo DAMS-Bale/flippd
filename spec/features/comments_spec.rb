@@ -42,7 +42,7 @@ feature "A video page" do
 
   it "contains the video time in the correct format" do
     within('body') do
-      expect(page).to have_content '1m30s'
+      expect(page).to have_content '90 seconds'
     end
   end
 
@@ -74,7 +74,7 @@ feature "A video page" do
       fill_in( ("videoTimeSeconds-" + @original.id.to_s), with: "42")
       click_on "Save changes"
     end
-    expect(page).to have_content "1m42s"
+    expect(page).to have_content "102 seconds"
   end
 
   it "allows deleteing a comment (ui)" do
@@ -107,7 +107,7 @@ feature "A video page" do
 
     it "contains the new video time in the correct format" do
       within('body') do
-        expect(page).to have_content '2m00s'
+        expect(page).to have_content '120 seconds'
       end
     end
 
