@@ -4,4 +4,15 @@ class User
   property :id, Serial
   property :name, String, required: true, length: 150
   property :email, String, required: true, length: 150
+  property :lecturer, Boolean, allow_nil:true
+
+  def is_lecturer
+    #check for  a dot before the @
+    if lecturer.nil?
+      return email.partition("@").first.include? '.'
+    else
+      return lecturer
+    end
+  end
+
 end
