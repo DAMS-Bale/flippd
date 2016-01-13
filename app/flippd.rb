@@ -14,7 +14,7 @@ class Flippd < Sinatra::Application
   use Rack::Flash
 
   before do
-    @version = "0.0.5"
+    @version = "0.0.5.1"
   end
 
   helpers do
