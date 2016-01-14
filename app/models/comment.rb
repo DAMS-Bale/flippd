@@ -27,6 +27,11 @@ class Comment
     )
   end
 
+  # Returns the video time as a Time object, if any
+  def video_time
+    @videoTime.nil? ? nil : Time.at(@videoTime)
+  end
+
   # Edits this comment and updates last editor and last edit timestamp
   def edit_comment user, new_text
     update(
