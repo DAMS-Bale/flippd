@@ -208,10 +208,10 @@
             <i class="fa fa-fw fa-clock-o"></i>
             Created <%= comment.commentTime.strftime "%d-%m-%Y at %H:%M"%>
 
-            <% unless comment.videoTime == 0 %>
+            <% unless comment.video_time == nil %>
               <a class="btn btn-info btn-xs pull-right" href="#" onclick="player.seekTo(<%= comment.videoTime %>, true)">
                 <i class="fa fa-fw fa-play"></i>
-                <%= comment.videoTime%> seconds
+                <%= comment.video_time.strftime("%Mm%Ss")%>
               </a>
             <% end %>
         </div>
