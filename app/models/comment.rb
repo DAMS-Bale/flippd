@@ -17,15 +17,17 @@ class Comment
   belongs_to :lastEditUser, 'User', required: false
   belongs_to :parent, 'Comment', required: false
 
+  # Not needed for this basic linear structure, instead create new comments for
+  # the video
   # Adds a reply to this comment, and returns the new comment.
-  def add_reply user, text
-    Comment::create(
-      :parent       =>  self,
-      :videoId      =>  @videoId,
-      :text         =>  text,
-      :user         =>  user
-    )
-  end
+  # def add_reply user, text
+  #   Comment::create(
+  #     :parent       =>  self,
+  #     :videoId      =>  @videoId,
+  #     :text         =>  text,
+  #     :user         =>  user
+  #   )
+  # end
 
   # Returns the video time as a Time object, if any
   def video_time
@@ -51,23 +53,6 @@ class Comment
     update(
       :videoTime => new_video_time
     )
-  end
-
-  # Gets the time of the video in the format "12m40s"
-  def video_time_display
-    if @videoTime.nil?
-      return ""
-    end
-
-    seconds = @videoTime.modulo(60)
-    if seconds < 10
-      seconds = "0" + seconds.to_s
-    end
-
-    minutes = @videoTime / 60
-    minutes = minutes.round
-
-    minutes.to_s + "m" + seconds.to_s + "s"
   end
 
 end

@@ -57,7 +57,8 @@ class Flippd < Sinatra::Application
 
     # Collects the POST params
     comment = Comment.get(params[:id])
-    new_video_time = (params[:videoTimeMinutes].to_i * 60) + params[:videoTimeSeconds].to_i
+    new_video_time = (params[:videoTimeMinutes].to_i * 60) + \
+      params[:videoTimeSeconds].to_i
 
     # Edits the comment
     comment.edit_video_time new_video_time
