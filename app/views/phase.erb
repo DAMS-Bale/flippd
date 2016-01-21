@@ -14,12 +14,30 @@
         </p>
 
         <ul>
-        <% topic["videos"].each do |video| %>
-            <li>
-              <a href="/videos/<%=video["id"]%>"><%=video["title"]%></a>
-            </li>
-        <% end %>
+          <% topic["videos"].each do |video| %>
+              <li>
+                <a href="/videos/<%=video["id"]%>"><%=video["title"]%></a>
+              </li>
+          <% end %>
         </ul>
+
+        <% if topic.include? "quizzes"  %>
+        <p>Quizzes</p>
+        <ul>
+            <% topic["quizzes"].each do |quiz| %>
+              <% quiz = Quiz.get(quiz) %>
+              <% if quiz.nil? %>
+                <% next %>
+              <% end %>
+                <li>
+                  <a href="/quiz/<%=quiz.id%>">
+                    <%= quiz.name %>
+                  </a>
+                </li>
+            <% end %>
+        </ul>
+        <% end %>
+
       </div>
 
     <% if index.odd? || index == (@phase["topics"].size - 1) %>

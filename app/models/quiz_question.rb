@@ -7,4 +7,6 @@ class Question
   property :id, Serial
   property :text, String, length: 1024, required: true
 
+  has n, :answers
+
 end

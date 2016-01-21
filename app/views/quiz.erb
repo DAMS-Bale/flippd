@@ -1,0 +1,39 @@
+<h1><%= @quiz.name %></h1>
+<p class="lead">Please answer all questions.</p>
+
+<form action="/quiz/<%= @quiz.id %>/mark" method="POST">
+
+  <div id="questions">
+    <% @quiz.questions.each do |question| %>
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <h4><%= question.text %></h4>
+          <p>Please choose an answer for this question.</p>
+
+          <% question.answers.each do |answer| %>
+            <p>
+              <label>
+                <input type="checkbox" name="<%= question.id %>"
+                       value="<%= answer.id %>" />
+                <%= answer.text %>
+              </label>
+            </p>
+          <% end %>
+
+        </div>
+      </div>
+      <hr />
+    <% end %>
+
+    <p>
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-fw fa-check"></i>
+        Mark
+      </button>
+    </p>
+
+  </div>
+
+</form>

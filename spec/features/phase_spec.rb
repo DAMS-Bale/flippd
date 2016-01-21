@@ -3,6 +3,7 @@ feature "A phase page" do
 
   it "contains the phase's title" do
     within('#main') do
+      save_and_open_page
       expect(page).to have_content 'Fundamentals'
     end
   end

@@ -5,5 +5,6 @@ class Quiz
 
   property :id, Serial
   property :name, String, length: 256, required: true
+  has n, :questions
 
 end
