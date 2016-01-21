@@ -1,6 +1,6 @@
+
 feature "The quiz route" do
   before(:each) do
-
     @quiz = Quiz::create(
       :name    => "Test Quiz 1",
     )
@@ -8,7 +8,9 @@ feature "The quiz route" do
 
   context "marking" do
     it "is a valid route" do
-      post "/quiz/" + @quiz.id.to_s + "/mark", :answers => []
+      header = {'Content-Type' => 'application/json'}
+      body = { :answers => [] }.to_json
+      post "/quiz/" + @quiz.id.to_s + "/mark", body, header
     end
   end
 end
