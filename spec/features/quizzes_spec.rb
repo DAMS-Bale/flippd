@@ -79,6 +79,19 @@ feature "A quiz" do
           expect(page).to have_content 'Bob'
         end
       end
+
+      context "marking" do
+        before(:each) do
+          check @answer1_1.id
+          check @answer1_2.id
+          uncheck @answer2_1.id
+          uncheck @answer2_2.id
+        end
+
+        it "submits the response" do
+          click_on "Mark"
+        end
+      end
     end
   end
 

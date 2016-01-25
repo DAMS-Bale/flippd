@@ -10,11 +10,9 @@ class Flippd < Sinatra::Application
   post '/quiz/:id/mark' do
     # Get the parameters from the form
     @answers = params[:answers]
-
     @results = Quiz.get(params[:id]).mark(@answers)
-
-    @quiz = Quiz.get(params[:id])
-    erb :quiz
+    # TODO: Uncomment once created.
+    # erb :quiz_results
   end
 
 

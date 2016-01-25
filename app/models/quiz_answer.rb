@@ -7,6 +7,6 @@ class Answer
 
   property :id, Serial
   property :text, String, length: 1024, required: true
-  property :correct, Boolean
+  property :correct?, Boolean
 
 end
