@@ -7,4 +7,10 @@ class Quiz
   property :name, String, length: 256, required: true
   has n, :questions
 
+  def mark(answers)
+    # TODO: mark
+    puts answers
+    answers
+  end
+
 end
