@@ -10,9 +10,8 @@ class Quiz
   def mark(answers)
     results = []
     Question.all(:quiz => id).each do |question|
-      var r = question.mark(answers.select { |answer| answer.id == question.id})
-      results[question.id] = r
+      results[question.id] = question.mark(answers.get(question_id))
     end
+    results
   end
-
 end
