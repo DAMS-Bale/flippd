@@ -95,6 +95,7 @@ feature "A quiz" do
     end
   end
 
+
   context "marking" do
     before(:each) do
       @header = {'Content-Type' => 'application/json'}
@@ -106,5 +107,41 @@ feature "A quiz" do
       post @route, @body, @header
     end
   end
+  context "single-selection" do
+    before(:each) do
+      @quiz3 = Quiz::create(
+        :name    => "Single Question Quiz"
+      )
+
+      @question3_1 = Question::create(
+        :quiz   =>  @quiz3,
+        :text   =>  "Correct Answer is 1?"
+      )
+
+      @answer3_1 = Answer::create(
+        :question => @question3_1,
+        :text     => "Alice",
+        :correct  => true
+      )
+
+      @answer3_2 = Answer::create(
+        :question => @question3_1,
+        :text     => "Bob",
+        :correct  => false
+      )
+      visit('/quiz/' + @quiz3.id.to_s)
+    end
+    it "single correct answer" do
+      check @answer3_1.id
+      click_on "Mark"
+      #TODO Add expect condition
+    end
+    it "single incorrect answer" do
+      check @answer3_2.id
+      click_on "Mark"
+      #TODO Add expect condition
+    end
+  end
+
 
 end
