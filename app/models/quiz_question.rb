@@ -28,6 +28,6 @@ class Question
       end
     end
 
-    return result
+    return results
   end
 end
