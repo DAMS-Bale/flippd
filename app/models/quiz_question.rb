@@ -10,21 +10,7 @@ class Question
   has n, :answers
 
   def mark(answer_id)
-    results = {:correct => [], :incorrect => [], :missed => []}
     answer = Answer.get(answer_id)
-    if answer.correct?
-      results[:correct].push(answer)
-    else
-      results[:incorrect].push(answer)
-    end
-
-    correct_answers = Answer.all(:question => id, :correct => true)
-    correct_answers.each do |correct_answer|
-      unless answer_id == correct_answer.id
-        results[:missed].push(correct_answer)
-      end
-    end
-
-    return results
+    return answer.correct?
   end
 end
