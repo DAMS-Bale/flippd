@@ -7,6 +7,8 @@ class Quiz
   property :name, String, length: 256, required: true
   has n, :questions
 
+  has n, :quiz_results
+
   def mark(answers)
     results = {}
     Question.all(:quiz => Quiz.get(id)).each do |question|

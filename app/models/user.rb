@@ -8,6 +8,8 @@ class User
   property :email, String, required: true, length: 150
   property :lecturer, Boolean, allow_nil:true
 
+  has n, :quiz_results
+
   def is_lecturer
     #check for  a dot before the @
     if lecturer.nil?
