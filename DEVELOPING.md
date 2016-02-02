@@ -11,7 +11,7 @@ If you are using a machine in CS student labs, you can skip this section. Otherw
 Run `git clone https://github.com/flippd/flippd.git`. This will create a directory `flippd`. In that directory, create a file called `.env` with the following contents:
 
 ```
-CONFIG_URL=https://raw.githubusercontent.com/york-cs-dams/flippd-dams/master/
+CONFIG_URL=https://raw.githubusercontent.com/DAMS-BALE/flippd-dams/master/
 COOKIE_SECRET=abcdefg
 ```
 

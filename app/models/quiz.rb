@@ -8,9 +8,9 @@ class Quiz
   has n, :questions
 
   def mark(answers)
-    results = []
-    Question.all(:quiz => id).each do |question|
-      results[question.id] = question.mark(answers.get(question_id))
+    results = {}
+    Question.all(:quiz => Quiz.get(id)).each do |question|
+      results[question.id] = question.mark(answers[question.id.to_s])
     end
     results
   end

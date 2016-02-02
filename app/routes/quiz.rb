@@ -7,18 +7,25 @@ class Flippd < Sinatra::Application
 
   post '/quiz/:id/mark' do
     # Get the answers from the form
-    @answers = params.select { |key, value| key.to_i != 0}
-    # Set the answers to the correct type (integer)
-    puts @answers
-    @answers = @answers.each do |question_id, answer_ids|
-      question_id = question_id.to_i
-      answer_ids = answer_ids.each { |a_id| a_id.to_i }
-    end
-
+    @answers = extract_post_data(params)
     @results = Quiz.get(params[:id]).mark(@answers)
-    puts @results
     erb :quiz_results
   end
 
+  def extract_post_data(post)
+    # So far we are only dealing with one type of questions.
+    # This hash could be replaced with an object in future
+    # iterations if need be.
+    answers = Hash.new
+
+    # The post form data specifies submitted answers in the form:
+    # qustion_id : answer_id
+    # The select statement ensures that the param's key is a number (i.e. it is
+    # a question_id).
+    params.each.select { |key, value| key.to_i != 0 }.each do |q_id, ans_id|
+       answers["#{q_id}"] = ("#{ans_id}")
+    end
+    return answers
+  end
 
 end

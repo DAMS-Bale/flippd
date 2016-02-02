@@ -43,6 +43,27 @@ feature "A quiz" do
       :text     => "Twenty",
       :correct  => false
     )
+
+    @quiz3 = Quiz::create(
+      :name    => "Single Question Quiz"
+    )
+
+    @question3_1 = Question::create(
+      :quiz   =>  @quiz3,
+      :text   =>  "Correct Answer is 1?"
+    )
+
+    @answer3_1 = Answer::create(
+      :question => @question3_1,
+      :text     => "Alice",
+      :correct  => true
+    )
+
+    @answer3_2 = Answer::create(
+      :question => @question3_1,
+      :text     => "Bob",
+      :correct  => false
+    )
   end
 
   describe("page view") do
@@ -82,10 +103,8 @@ feature "A quiz" do
 
       context "marking" do
         before(:each) do
-          check @answer1_1.id
-          check @answer1_2.id
-          check @answer2_1.id
-          uncheck @answer2_2.id
+          choose @answer1_1.id
+          choose @answer2_2.id
         end
 
         it "submits the response" do
@@ -93,55 +112,25 @@ feature "A quiz" do
         end
       end
     end
-  end
 
-
-  context "marking" do
-    before(:each) do
-      @header = {'Content-Type' => 'application/json'}
-      @body = { :answers => [] }.to_json
-      @route = "/quiz/" + @quiz.id.to_s + "/mark"
-    end
-
-    it "is a valid route" do
-      post @route, @body, @header
-    end
-  end
-  context "single-selection" do
-    before(:each) do
-      @quiz3 = Quiz::create(
-        :name    => "Single Question Quiz"
-      )
-
-      @question3_1 = Question::create(
-        :quiz   =>  @quiz3,
-        :text   =>  "Correct Answer is 1?"
-      )
-
-      @answer3_1 = Answer::create(
-        :question => @question3_1,
-        :text     => "Alice",
-        :correct  => true
-      )
-
-      @answer3_2 = Answer::create(
-        :question => @question3_1,
-        :text     => "Bob",
-        :correct  => false
-      )
-      visit('/quiz/' + @quiz3.id.to_s)
-    end
-    it "single correct answer" do
-      check @answer3_1.id
-      click_on "Mark"
-      #TODO Add expect condition
-    end
-    it "single incorrect answer" do
-      check @answer3_2.id
-      click_on "Mark"
-      #TODO Add expect condition
+    context "after opening the single-selection quiz page" do
+      before(:each) do
+        visit('/quiz/' + @quiz3.id.to_s)
+      end
+      it "single correct answer" do
+        choose @answer3_1.id
+        click_on "Mark"
+        #TODO Add expect condition
+      end
+      it "single incorrect answer" do
+        choose @answer3_2.id
+        click_on "Mark"
+        #TODO Add expect condition
+      end
     end
   end
+
+
 
 
 end

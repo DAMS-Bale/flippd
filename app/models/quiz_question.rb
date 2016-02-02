@@ -9,21 +9,19 @@ class Question
 
   has n, :answers
 
-  def mark(answers)
-    results = [:correct => [], :incorrect => [], :missed => []]
-
-    answers.each do |answer_id|
-      if Answers.first(answer_id).correct?
-        results[:correct].push(answer)
-      else
-        results[:incorrect].push(answer)
-      end
+  def mark(answer_id)
+    results = {:correct => [], :incorrect => [], :missed => []}
+    answer = Answer.get(answer_id)
+    if answer.correct?
+      results[:correct].push(answer)
+    else
+      results[:incorrect].push(answer)
     end
 
-    correct_answers = Answers.all(:question => id, :correct? => true)
-    correct_answers.each do |answer|
-      unless answers.include(answer.id)
-        results[:missed].push(answer)
+    correct_answers = Answer.all(:question => id, :correct => true)
+    correct_answers.each do |correct_answer|
+      unless answer_id == correct_answer.id
+        results[:missed].push(correct_answer)
       end
     end
 

@@ -1,11 +1,11 @@
 <h1>Results</h1>
 <p class="lead">The results of your assessment.</p>
 <p><%=@results.to_s%></p>
-<% @results.each do |result| %>
+<% @results.each do |question_id, result| %>
 <p><%=result.to_s%></p>
   <div class="row">
     <div class="alert alert-info">
-      <p>You answered: <%=result.correct.to_s%> correctly, <%=result.incorrect.to_s%> incorrectly and missed <%=result.missed.to_s%>.</p>
+      <p>For question <%=question_id%>, You answered: <%=result[:correct].to_s%> correctly, <%=result[:incorrect].to_s%> incorrectly and missed <%=result[:missed].to_s%>.</p>
     </div>
   </div>
 <% end %>

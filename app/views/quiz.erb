@@ -15,8 +15,8 @@
           <% question.answers.each do |answer| %>
             <p>
               <label>
-                <input type="checkbox" id="<%= answer.id %>"
-                  name="<%= question.id %>[]" value="<%= answer.id %>" />
+                <input type="radio" id="<%= answer.id %>"
+                  name="<%= question.id %>" value="<%= answer.id %>" />
                 <%= answer.text %>
               </label>
             </p>
