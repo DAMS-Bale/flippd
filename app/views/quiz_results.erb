@@ -2,15 +2,17 @@
 <p class="lead">The results of your assessment</p>
 <p class="bg-info"><h3><%=@results.select{ |q_id, res| res == true }.length%><small>/<%=@results.length%></small></h3></p>
 <table class="table">
-  <% @results.each do |question_id, result| %>
+  <% @results.each_with_index do |(question, result), index| %>
       <%if result%>
         <tr class="success">
-          <td>Question <%=question_id%></td>
+          <td><%=index%></td>
+          <td><%=question.text%></td>
           <td>Correct <i class="fa fa-check"></i></td>
         </tr>
       <%else%>
         <tr class="danger">
-          <td>Question <%=question_id%></td>
+          <td><%=index%></td>
+          <td><%=question.text%></td>
           <td>Incorrect <i class="fa fa-times"></i></td>
         </tr>
       <%end%>
