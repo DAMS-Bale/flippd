@@ -8,7 +8,13 @@ class Flippd < Sinatra::Application
   post '/quiz/:id/mark' do
     # Get the answers from the form
     @answers = extract_post_data(params)
-    @results = Quiz.get(params[:id]).mark(@answers)
+    quiz = Quiz.get(params[:id])
+    @results = quiz.mark(@answers)
+    # Only save if logged in.
+    if @user then
+      QuizResult.create(:quiz => Quiz.get(params[:id]), :user => @user,
+        :score => @results.select{ |q_id, res| res == true }.length)
+    end
     erb :quiz_results
   end
 

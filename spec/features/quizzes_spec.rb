@@ -113,6 +113,35 @@ feature "A quiz" do
       end
     end
 
+    context "after opening the quiz page when signed in" do
+      before(:each) do
+        sign_in from: ('/quiz/' + @quiz.id.to_s)
+      end
+
+      it "stores the results" do
+          choose @answer1_1.id
+          choose @answer2_2.id
+          click_on "Mark"
+          results = QuizResult.first
+          expect(results.quiz).to eq(@quiz)
+          expect(results.score).to eq(1)
+      end
+    end
+
+    context "after opening the quiz page when not signed in" do
+      before(:each) do
+        visit('/quiz/' + @quiz.id.to_s)
+      end
+
+      it "doesn't store the results" do
+          choose @answer1_1.id
+          choose @answer2_2.id
+          click_on "Mark"
+          results = QuizResult.all
+          expect(results.size).to eq(0)
+      end
+    end
+
     context "after opening the single-selection quiz page" do
       before(:each) do
         visit('/quiz/' + @quiz3.id.to_s)
