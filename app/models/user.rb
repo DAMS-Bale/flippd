@@ -7,6 +7,7 @@ class User
   property :name, String, required: true, length: 150
   property :email, String, required: true, length: 150
   property :lecturer, Boolean, allow_nil:true
+  property :share_results, Boolean, default: false
 
   has n, :quiz_results
 
@@ -24,7 +25,20 @@ class User
   end
 
   def best_results
-    repository.adapter.select("SELECT id, quiz_id, score, timestamp FROM quiz_results WHERE user_id = #{self.id} GROUP BY quiz_id ORDER BY timestamp DESC, score DESC")
+    repository.adapter.select("
+      SELECT q1.id AS id,
+             quiz_id AS quiz_id
+      FROM   quiz_results AS q1
+      WHERE  user_id = #{self.id}
+      AND    score = (
+        SELECT  MAX(q2.score)
+        FROM    quiz_results AS q2
+        WHERE   q2.quiz_id = q1.quiz_id
+        AND     q2.user_id = q1.user_id
+      )
+      GROUP BY quiz_id
+      ORDER BY timestamp DESC, score DESC
+    ")
   end
 
 
