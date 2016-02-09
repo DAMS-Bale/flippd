@@ -10,9 +10,9 @@ class Flippd < Sinatra::Application
 
     @leaderboard = repository.adapter.select("
       SELECT
-        users.id as user_id,
-        users.name as user_name,
-        SUM(best_scores.score) as user_score
+        users.id                AS user_id,
+        users.name              AS user_name,
+        SUM(best_scores.score)  AS user_score
       FROM
         (
           SELECT quiz_id, score, user_id
