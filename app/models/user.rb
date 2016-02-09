@@ -23,4 +23,9 @@ class User
     return is_lecturer || comment.user == self
   end
 
+  def best_results
+    repository.adapter.select("SELECT id, quiz_id, score, timestamp FROM quiz_results WHERE user_id = #{self.id} GROUP BY quiz_id ORDER BY timestamp DESC, score DESC")
+  end
+
+
 end

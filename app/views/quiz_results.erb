@@ -5,13 +5,13 @@
   <% @results.each_with_index do |(question, result), index| %>
       <%if result%>
         <tr class="success">
-          <td><%=index%></td>
+          <td><%=index + 1%></td>
           <td><%=question.text%></td>
           <td>Correct <i class="fa fa-check"></i></td>
         </tr>
       <%else%>
         <tr class="danger">
-          <td><%=index%></td>
+          <td><%=index + 1%></td>
           <td><%=question.text%></td>
           <td>Incorrect <i class="fa fa-times"></i></td>
         </tr>

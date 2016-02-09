@@ -13,4 +13,8 @@ class QuizResult
     |p,s| DateTime.now
   }
 
+  def percentage
+    (100 * score / quiz.number_of_correct_answers).round(2)
+  end
+
 end
