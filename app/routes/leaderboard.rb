@@ -40,6 +40,12 @@ class Flippd < Sinatra::Application
 
   end
 
+  get '/leaderboard/switch' do
+    @user.share_results = !@user.share_results
+    @user.save
+    redirect to('/leaderboard')
+  end
+
 
 
 end
