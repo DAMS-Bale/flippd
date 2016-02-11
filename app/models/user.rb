@@ -10,6 +10,7 @@ class User
   property :share_results, Boolean, default: false
 
   has n, :quiz_results
+  has n, :page_views
 
   def is_lecturer
     #check for  a dot before the @
