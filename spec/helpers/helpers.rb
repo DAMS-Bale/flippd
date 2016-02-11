@@ -1,13 +1,14 @@
 module Helpers
-  def sign_in(from: '/')
+  def sign_in(from: '/', name: "Joe Bloggs", email: "joe@bloggs.com")
     OmniAuth.config.test_mode = false
     visit from
     click_on 'Sign In' if page.has_link?('Sign In')
 
-    fill_in 'Name', with: 'Joe Bloggs'
-    fill_in 'Email', with: 'joe@bloggs.com'
+    fill_in 'Name', with: name
+    fill_in 'Email', with: email
     click_on 'Sign In'
   end
+
 
   def sign_in_lecturer(from: '/')
     OmniAuth.config.test_mode = false

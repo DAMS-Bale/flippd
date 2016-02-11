@@ -2,10 +2,12 @@ feature "A quiz" do
   before(:each) do
 
     @quiz = Quiz::create(
+      :id      => 1,
       :name    => "My quiz"
     )
 
     @quiz2 = Quiz::create(
+      :id      => 2,
       :name    => "My second quiz"
     )
 
