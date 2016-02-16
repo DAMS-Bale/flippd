@@ -37,15 +37,26 @@
           <%= result.timestamp.strftime("%d/%m/%Y %H:%M") %>
         </td>
       </tr>
-
     <% end %>
+
+    <% if @best_results.empty? %>
+     <tr class="warning">
+       <td colspan="4">
+        <i class="fa fa-fw fa-info-circle"></i>
+        <%= @results_user.name %> has not yet completed any formative
+                                  assessments.
+      </td>
+     </tr>
+   <% end %>
   </tbody>
 
 </table>
 
 <p>&nbsp;</p>
 
-<div id="user_chart"></div>
+<% if @best_results.any? %>
+  <div id="user_chart"></div>
+<% end %>
 
 <p>&nbsp;</p>
 
