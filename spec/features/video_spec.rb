@@ -45,8 +45,8 @@ feature "A video page" do
     end
 
     it "creates a page view" do
-      expect(PageView.all.size).to eq(1)
-      expect(PageView.first.route).to eq('/videos/1')
+      expect(VideoView.all.size).to eq(1)
+      expect(VideoView.first.video_id).to eq(1)
     end
   end
 end
