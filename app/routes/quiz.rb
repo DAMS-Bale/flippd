@@ -12,8 +12,13 @@ class Flippd < Sinatra::Application
     @results = quiz.mark(@answers)
     # Only save if logged in.
     if @user then
-      QuizResult.create(:quiz => Quiz.get(params[:id]), :user => @user,
-        :score => @results.select{ |q_id, res| res == true }.length)
+
+      quiz = Quiz.get(params[:id])
+      score = @results.select{ |q_id, res| res == true }.length
+
+      # Add the result and calculates the best score for the result.
+      @user.add_quiz_result(quiz, score)
+
     end
     erb :quiz_results
   end

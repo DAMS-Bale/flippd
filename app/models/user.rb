@@ -25,22 +25,46 @@ class User
     return is_lecturer || comment.user == self
   end
 
-  def best_results
-    repository.adapter.select("
-      SELECT q1.id AS id,
-             quiz_id AS quiz_id
-      FROM   quiz_results AS q1
-      WHERE  user_id = #{self.id}
-      AND    score = (
-        SELECT  MAX(q2.score)
-        FROM    quiz_results AS q2
-        WHERE   q2.quiz_id = q1.quiz_id
-        AND     q2.user_id = q1.user_id
-      )
-      GROUP BY quiz_id
-      ORDER BY timestamp DESC, score DESC
-    ")
+  def total_score
+    # Gets the total score for the quizzes of the user.
+    total = 0
+    for result in self.best_results
+      total += result.score
+    end
+    total
   end
 
+  def best_results
+    # Gets the current best results for the user.
+    QuizResults.all(
+      :user => self,
+      :best => true,
+      :order => [:timestamp.desc, :score.desc]
+    )
+  end
+
+  def add_quiz_result(quiz, score)
+    # Firsty, create the new quiz result instance.
+    current = QuizResult.create(
+      :quiz => quiz,
+      :user => self,
+      :score => score,
+      :best => false
+    )
+
+    # Secondly, get current best score for the quiz.
+    best = QuizResult.get(
+      :quiz => quiz,
+      :user => self,
+      :best => true,
+      :limit => 1
+    )
+
+    # If this is the new best score, update.
+    if best and best.score < score
+      best.update(:best => false)
+      current.update(:best => true)
+    end
+  end
 
 end

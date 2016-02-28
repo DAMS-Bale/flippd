@@ -8,6 +8,7 @@ class QuizResult
   belongs_to :user
 
   property :score, Integer, required: true
+  property :best, Boolean, required: true
 
   property :timestamp, DateTime, required: true, default: lambda{
     |p,s| DateTime.now
