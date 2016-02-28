@@ -2,7 +2,7 @@ class Flippd < Sinatra::Application
   get '/videos/:id' do
     # Save the video page view if logged in.
     if @user then
-      PageView.first_or_create(:route => ('/videos/' + params['id']), :user => @user)
+      VideoView.first_or_create(:video_id => params['id'].to_i, :user => @user)
     end
 
     @phases.each do |phase|

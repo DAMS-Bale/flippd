@@ -1,14 +1,16 @@
 # This represents the Leaderboard
 class Leaderboard
 
-  def users
+  def self.users
     # Gets the users for consideration in the leaderboard.
-    User.all
+    User.all(
+      :share_results => true
+    )
   end
 
-  def results
+  def self.results
     leaderboard = []
-    for user in users
+    for user in Leaderboard.users
       leaderboard += [{:user => user, :score => user.total_score}]
     end
     leaderboard.sort_by {|i| i[:score]}

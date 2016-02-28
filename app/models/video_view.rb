@@ -1,10 +1,10 @@
 # This model represents a page view by a user, such as for when a video is viewed.
-class PageView
+class VideoView
   include DataMapper::Resource
 
   property :id, Serial
 
-  property :route, String, :required => true
+  property :video_id, Integer, required: true
 
   belongs_to :user
 

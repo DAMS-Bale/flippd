@@ -10,7 +10,7 @@ class User
   property :share_results, Boolean, default: false
 
   has n, :quiz_results
-  has n, :page_views
+  has n, :video_views
 
   def is_lecturer
     #check for  a dot before the @
@@ -36,7 +36,7 @@ class User
 
   def best_results
     # Gets the current best results for the user.
-    QuizResults.all(
+    QuizResult.all(
       :user => self,
       :best => true,
       :order => [:timestamp.desc, :score.desc]

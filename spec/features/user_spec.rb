@@ -11,8 +11,8 @@ feature "a user dashboard page" do
     end
 
     it "should have a page view" do
-      expect(PageView.all.size).to eq(1)
-      expect(User.first.page_views.size).to eq(1)
+      expect(VideoView.all.size).to eq(1)
+      expect(User.first.video_views.size).to eq(1)
       expect(page).to have_content("Video Views: 1")
       expect(page).to have_content('Ruby true')
     end
@@ -24,8 +24,8 @@ feature "a user dashboard page" do
       end
 
       it "should have one video view" do
-        expect(PageView.all.size).to eq(1)
-        expect(User.first.page_views.size).to eq(1)
+        expect(VideoView.all.size).to eq(1)
+        expect(User.first.video_views.size).to eq(1)
         expect(page).to have_content("Video Views: 1")
         expect(page).to have_content('Ruby true')
       end
