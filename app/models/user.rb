@@ -31,7 +31,8 @@ class User
     for result in self.best_results
       total += result.score
     end
-    total
+    # Add the score for watching videos.
+    total += self.video_views.size * 5
   end
 
   def best_results
