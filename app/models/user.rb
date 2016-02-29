@@ -53,7 +53,7 @@ class User
     )
 
     # Secondly, get current best score for the quiz.
-    best = QuizResult.get(
+    best = QuizResult.first(
       :quiz => quiz,
       :user => self,
       :best => true,
@@ -64,7 +64,10 @@ class User
     if best and best.score < score
       best.update(:best => false)
       current.update(:best => true)
+    elsif best.nil?
+      current.update(:best => true)
     end
+
   end
 
 end
