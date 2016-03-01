@@ -34,6 +34,60 @@ feature "a user dashboard page" do
 
     end
   end
+
+  context "where a quiz exists" do
+    before(:each) do
+      @quiz = Quiz::create(
+        :id      => 1,
+        :name    => "My quiz"
+      )
+      @question1 = Question::create(
+        :quiz   =>  @quiz,
+        :text   =>  "What's my name?"
+      )
+
+      @answer1_1 = Answer::create(
+        :question => @question1,
+        :text     => "Alice",
+        :correct  => true
+      )
+
+      @answer1_2 = Answer::create(
+        :question => @question1,
+        :text     => "Bob",
+        :correct  => false
+      )
+    end
+
+    context "after getting 0%" do
+      before(:each) do
+        visit('/quiz/' + @quiz.id.to_s)
+        choose @answer1_2.id
+        click_on "Mark"
+        visit_dashboard
+      end
+
+      it "should have the result listed" do
+        expect(page).to have_content(
+          "#{@quiz.name} 0.0% 0 / 1 #{DateTime.now.strftime("%d/%m/%Y")}")
+      end
+
+      context "after getting 100%" do
+        before(:each) do
+          visit('/quiz/' + @quiz.id.to_s)
+          choose @answer1_1.id
+          click_on "Mark"
+          visit_dashboard
+        end
+
+        it "should have the best result listed" do
+          expect(page).to have_content(
+            "#{@quiz.name} 100.0% 1 / 1 #{DateTime.now.strftime("%d/%m/%Y")}")
+        end
+      end
+    end
+
+  end
 end
 
 def visit_dashboard
