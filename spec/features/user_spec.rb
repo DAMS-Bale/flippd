@@ -15,6 +15,7 @@ feature "a user dashboard page" do
       expect(User.first.video_views.size).to eq(1)
       expect(page).to have_content("Video Views: 1")
       expect(page).to have_content('Ruby true')
+      expect(page).to have_content('5 Points')
     end
 
     context "twice" do
@@ -28,6 +29,7 @@ feature "a user dashboard page" do
         expect(User.first.video_views.size).to eq(1)
         expect(page).to have_content("Video Views: 1")
         expect(page).to have_content('Ruby true')
+        expect(page).to have_content('5 Points')
       end
 
     end
