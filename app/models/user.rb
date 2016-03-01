@@ -7,6 +7,10 @@ class User
   property :name, String, required: true, length: 150
   property :email, String, required: true, length: 150
   property :lecturer, Boolean, allow_nil:true
+  property :share_results, Boolean, default: false
+
+  has n, :quiz_results
+  has n, :video_views
 
   def is_lecturer
     #check for  a dot before the @
@@ -19,6 +23,52 @@ class User
 
   def can_edit_comment comment
     return is_lecturer || comment.user == self
+  end
+
+  def total_score
+    # Gets the total score for the quizzes of the user.
+    total = 0
+    for result in self.best_results
+      total += result.score
+    end
+    # Add the score for watching videos.
+    total += self.video_views.size * 5
+  end
+
+  def best_results
+    # Gets the current best results for the user.
+    QuizResult.all(
+      :user => self,
+      :best => true,
+      :order => [:timestamp.desc, :score.desc]
+    )
+  end
+
+  def add_quiz_result(quiz, score)
+    # Firsty, create the new quiz result instance.
+    current = QuizResult.create(
+      :quiz => quiz,
+      :user => self,
+      :score => score,
+      :best => false
+    )
+
+    # Secondly, get current best score for the quiz.
+    best = QuizResult.first(
+      :quiz => quiz,
+      :user => self,
+      :best => true,
+      :limit => 1
+    )
+
+    # If this is the new best score, update.
+    if best and best.score < score
+      best.update(:best => false)
+      current.update(:best => true)
+    elsif best.nil?
+      current.update(:best => true)
+    end
+
   end
 
 end

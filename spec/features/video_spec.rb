@@ -38,4 +38,15 @@ feature "A video page" do
       expect(page).to have_link 'Middleware', href: "/videos/30"
     end
   end
+
+  context "when logged in" do
+    before(:each) do
+      sign_in from: ('/videos/1')
+    end
+
+    it "creates a page view" do
+      expect(VideoView.all.size).to eq(1)
+      expect(VideoView.first.video_id).to eq(1)
+    end
+  end
 end

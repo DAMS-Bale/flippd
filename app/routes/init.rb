@@ -1,4 +1,7 @@
 require_relative 'auth'
 require_relative 'main'
+require_relative 'video'
 require_relative 'comments'
 require_relative 'quiz'
+require_relative 'user'
+require_relative 'leaderboard'

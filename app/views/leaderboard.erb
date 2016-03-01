@@ -1,0 +1,71 @@
+<div class="col-md-6">
+
+
+  <h1>
+    Leaderboard
+  </h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Total score</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @leaderboard.each_with_index do |item, rank| %>
+      <tr>
+        <td><%= rank + 1 %></td>
+        <td>
+          <a href="/user/<%= item[:user].id %>">
+            <%= item[:user].name %>
+          </a>
+        </td>
+        <td>
+          <%= item[:score].to_i %>
+        </td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+</div>
+
+<div class="col-md-6">
+
+  <h2>Share your results</h2>
+
+  <% if @user.share_results %>
+    <p class="text-success">
+      <i class="fa fa-fw fa-check"></i>
+      You are currently sharing your results with the other users.
+    </p>
+    <p>
+      Click on the button below if you want to disable sharing.
+    </p>
+
+  <% else %>
+    <p class="text-danger">
+      <i class="fa fa-fw fa-times"></i>
+      You are currently NOT sharing your results with the other users.
+    </p>
+    <p>
+      Click on the button below if you want to enable sharing.
+    </p>
+
+  <% end %>
+
+  <p>
+    <a href="/leaderboard/switch" class="btn btn-block btn-default <% if @user.share_results %>active<% end %>">
+      <% if @user.share_results %>
+        <strong>Sharing ON</strong> &mdash; Click to disable sharing
+      <% else %>
+      <strong>Sharing OFF</strong> &mdash; Click to enable sharing
+      <% end %>
+    </a>
+  </p>
+
+</div>
