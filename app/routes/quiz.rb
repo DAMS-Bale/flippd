@@ -13,7 +13,6 @@ class Flippd < Sinatra::Application
     # Only save if logged in.
     if @user then
 
-      quiz = Quiz.get(params[:id])
       score = @results.select{ |q_id, res| res == true }.length
 
       # Add the result and calculates the best score for the result.

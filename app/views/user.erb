@@ -3,7 +3,8 @@
   <%= @results_user.name %>
 </h1>
 <p class="lead">
-  User dashboard
+  <span id="total_score" class="label label-info"><%=@results_user.total_score%> Points</span>
+  <a class="small" href="/leaderboard">View Leaderboard</a>
 </p>
 
 <h3>Formative assessments results</h3>
@@ -27,7 +28,7 @@
           </a>
         </td>
         <td>
-          <%= result.percentage %> %
+          <%= result.percentage %>%
         </td>
         <td>
           <%= result.score %> / <%= result.quiz.number_of_correct_answers %>
