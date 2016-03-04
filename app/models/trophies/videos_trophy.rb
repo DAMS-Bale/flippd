@@ -1,6 +1,6 @@
 # A trophy of this type can be awarded to an user when
 # they have watched a given number of videos.
-class VideosTrophy
+class VideosTrophy < Trophy
 
   def configure params
     @number_of_videos = params['videos']

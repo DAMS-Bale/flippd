@@ -8,9 +8,11 @@ else
 end
 
 # Require all of the files under /app/models/
-models_directory = File.dirname(__FILE__) + "/../models/"
-model_files = Dir[models_directory + "*.rb"]
-model_files.each { |f| require f }
+models_directories = ["/../models/", "/../models/trophies/"]
+models_directories.each do |models_directory|
+  model_files = Dir[File.dirname(__FILE__) + models_directory + "*.rb"]
+  model_files.each { |f| require f }
+end
 
 DataMapper.finalize
 

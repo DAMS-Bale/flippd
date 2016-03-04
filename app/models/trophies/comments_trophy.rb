@@ -1,6 +1,6 @@
 # A trophy of this type can be awarded when the user reaches
 # a given number of comments.
-class CommentsTrophy
+class CommentsTrophy < Trophy
 
   def configure params
     @number_of_comments = params['comments']
