@@ -7,7 +7,7 @@ class CommentsTrophy < Trophy
   end
 
   def should_be_awarded user
-    Comment.count(:user => user) > @number_of_comments
+    Comment.count(:user => user) >= @number_of_comments
   end
 
   def to_s

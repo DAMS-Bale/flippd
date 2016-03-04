@@ -60,13 +60,15 @@ class TrophiesManager
   def check_for_new_trophies_to_award user
 
     @loaded_trophies.each do |trophy|
-
-      # TODO
       # If the trophy has not been awarded yet to the user,
-      #  then call the trophy's should_be_awarded method.
-      #  If it should be awarded to the user,
-      #   save it somewhere in the database! (needs a new model)
-
+      unless TrophyUser.count(:user => user, :trophy => trophy) > 0
+        #  then call the trophy's should_be_awarded method.
+        if trophy.should_be_awarded user
+          #  If it should be awarded to the user,
+          #   save it somewhere in the database!
+          TrophyUser.create(:user => user, :trophy => trophy)
+        end
+      end
     end
 
   end

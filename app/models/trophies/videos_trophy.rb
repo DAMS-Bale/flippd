@@ -7,7 +7,7 @@ class VideosTrophy < Trophy
   end
 
   def should_be_awarded user
-    VideoView.count(:user => user) > @number_of_videos
+    VideoView.count(:user => user) >= @number_of_videos
   end
 
   def to_s
