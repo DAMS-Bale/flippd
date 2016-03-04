@@ -11,6 +11,7 @@ class User
 
   has n, :quiz_results
   has n, :video_views
+  has n, :trophys, :through => Resource
 
   def is_lecturer
     #check for  a dot before the @

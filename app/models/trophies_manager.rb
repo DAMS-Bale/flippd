@@ -42,7 +42,7 @@ class TrophiesManager
       trophy.configure(json_trophy['configuration'])
 
       # Updates the description of the trophy
-      trophy.update(:descrition => trophy.to_s)
+      trophy.update(:description => trophy.to_s)
 
       @loaded_trophies.append trophy
 

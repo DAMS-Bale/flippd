@@ -9,6 +9,8 @@ class Trophy
   property :name, String, required: true, length: 64
   property :description, String, required: true, length: 64
 
+  has n, :users, :through => Resource
+
   def new *args
     # This method prevents a trophy object to be instantiated direclty.
     # A specific type of trophy, such as "QuizTrophy", shuld be instantiated
