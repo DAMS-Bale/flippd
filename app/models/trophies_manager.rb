@@ -6,8 +6,14 @@ require 'digest'
 # award the same trophy to an user twice.
 class TrophiesManager
 
-  def load_trophies json_trophies
+  def initialize
     @loaded_trophies = []
+  end
+
+  def load_trophies json_trophies
+    # Loads the trophies from the configuration section of the
+    # JSON file.
+
     json_trophies.each do |json_trophy|
 
       json_hash = TrophiesManager.configuration_hash json_trophy
@@ -41,8 +47,6 @@ class TrophiesManager
       @loaded_trophies.append trophy
 
     end
-
-
   end
 
   def self.configuration_hash
@@ -51,5 +55,18 @@ class TrophiesManager
     Digest::SHA256.hexdigest json_trophy.to_json
   end
 
+  def check_for_new_trophies_to_award user
+
+    @loaded_trophies.each do |trophy|
+
+      # TODO
+      # If the trophy has not been awarded yet to the user,
+      #  then call the trophy's should_be_awarded method.
+      #  If it should be awarded to the user,
+      #   save it somewhere in the database! (needs a new model)
+
+    end
+
+  end
 
 end
