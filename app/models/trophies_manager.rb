@@ -22,20 +22,22 @@ class TrophiesManager
 
       # First, make sure that the class is valid and exists.
       begin
-        trophy_type = class_name.constantize
+        trophy_type = Object.const_get(class_name)
       rescue
         raise "#{class_name} is not a valid trophy type."
       end
 
       # Secondly, make sure it is a trophy.
-      unless trophy_type.is_a? Trophy
+      unless trophy_type < Trophy
         raise "#{class_name} is not a trophy and can't be instantiated."
       end
+
+      trophy_type.raise_on_save_failure = true
 
       # Creates or get the trophy from the database
       trophy = trophy_type.first_or_create(
         :json_hash => json_hash,
-        :name => name,
+        :name => json_trophy['name'],
       )
 
       # Configures the trophy
@@ -44,12 +46,12 @@ class TrophiesManager
       # Updates the description of the trophy
       trophy.update(:description => trophy.to_s)
 
-      @loaded_trophies.append trophy
+      @loaded_trophies.push trophy
 
     end
   end
 
-  def self.configuration_hash
+  def self.configuration_hash json_trophy
     # Given the configuration dictionary, returns the hash
     # to store in the database.
     Digest::SHA256.hexdigest json_trophy.to_json

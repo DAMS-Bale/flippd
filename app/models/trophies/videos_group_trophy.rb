@@ -1,6 +1,6 @@
 # A trophy of this type can be awarded to a user if they
 # watched all videos in a given group of videos
-class VideosGroupTrophy
+class VideosGroupTrophy < Trophy
 
   def configure params
     @video_ids = params['videos']

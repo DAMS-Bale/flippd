@@ -4,10 +4,10 @@ class Trophy
   include DataMapper::Resource
 
   property :id, Serial
-  property :json_hash, String, required: true, length: 32
+  property :json_hash, String, required: true, length: 64
   property :type, DataMapper::Property::Discriminator
   property :name, String, required: true, length: 64
-  property :description, String, required: true, length: 64
+  property :description, String, default: '', length: 64
 
   has n, :users, :through => Resource
 
