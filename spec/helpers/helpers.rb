@@ -31,6 +31,11 @@ module Helpers
     click_on 'Sign Out'
   end
 
+  def visit_dashboard
+    click_on "user-dropdown"
+    click_on "View Dashboard"
+  end
+
 end
 
 OmniAuth.config.logger.level = Logger::UNKNOWN
