@@ -816,19 +816,7 @@
       "type": "VideosGroupTrophy",
       "name": "Extensible Square Eyes",
       "configuration": {
-        "videos": [
-          "habitable-programs-extensibility-why-extensibility",
-          "habitable-programs-extensibility-observers",
-          "habitable-programs-extensibility-middleware",
-          "habitable-programs-extensibility-plugins"]
-      }
-    },
-    {
-      "type": "QuizTrophy",
-      "name": "Full Marks",
-      "configuration": {
-        "quiz_id": 1,
-        "score": 5
+        "videos": ["28", "29", "30", "31"]
       }
     }
   ]

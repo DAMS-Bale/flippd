@@ -1,5 +1,6 @@
 feature "a user dashboard page trophies" do
   before(:each) do
+    @quiz = create_quiz
     sign_in from: ('/')
     visit_dashboard
   end
@@ -42,7 +43,22 @@ feature "a user dashboard page trophies" do
           expect(page).to have_content("Watch at least 4 videos");
       end
     end
+  end
 
+  context "after viewing the set of extensibility videos" do
+    before(:each) do
+      visit('/videos/28')
+      visit('/videos/29')
+      visit('/videos/30')
+      visit('/videos/31')
+      visit_dashboard
+    end
+
+    it "should show the Extensible Square Eyes trophy" do
+      expect(page).to have_content("Trophies: 3");
+      expect(page).to have_content("Extensible Square Eyes");
+      expect(page).to have_content("Watch all the videos in the group: 28, 29, 30, 31");
+    end
   end
 
   context "after leaving a comment" do

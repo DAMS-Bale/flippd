@@ -8,7 +8,7 @@ class VideosGroupTrophy < Trophy
 
   def should_be_awarded user
     @video_ids.each do |video_id|
-      unless VideoView.count(:user => user, :video_id => video_id)
+      unless VideoView.count(:user => user, :video_id => video_id) > 0
         return false
       end
     end
