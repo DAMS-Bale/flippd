@@ -8,11 +8,12 @@ class QuizTrophy < Trophy
   end
 
   def should_be_awarded user
-    !!QuizResult.all(:quiz => @quiz, :user => user, :score.gte => @minimum_score)
+    QuizResult.all(:quiz => @quiz, :user => user, :score.gte => @minimum_score).size > 0
   end
 
   def to_s
-    "Complete the #{@quiz.name} quiz with a score greater or equal to #{@minimum_score}"
+    name = @quiz == nil ? 'cannot find quiz' : @quiz.name
+    "Complete the #{name} quiz with a score greater or equal to #{@minimum_score}"
   end
 
 end

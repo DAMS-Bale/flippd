@@ -32,7 +32,7 @@ Capybara.app = Flippd
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include Helpers
-  
+
   include Rack::Test::Methods
   def app() Sinatra::Application end
 
@@ -77,6 +77,9 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+  config.before(:each) do
+    create_quiz
   end
 
 =begin
