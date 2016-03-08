@@ -19,4 +19,5 @@ class VideosGroupTrophy < Trophy
     all_videos = @video_ids.join ", "
     "Watch all the videos in the group: #{all_videos}"
   end
+
 end
