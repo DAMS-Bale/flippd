@@ -3,11 +3,15 @@ class Trophy
 
   include DataMapper::Resource
 
+  # Defines the default image for the trophies.
+  DEFAULT_IMAGE="//raw.githubusercontent.com/DAMS-Bale/flippd-trophies/master/medal.png"
+
   property :id, Serial
   property :json_hash, String, required: true, length: 64
   property :type, DataMapper::Property::Discriminator
   property :name, String, required: true, length: 64
-  property :description, String, default: '', length: 64
+  property :description, String, default: '', length: 1024
+  property :image, String, default: DEFAULT_IMAGE, required: false, length: 255
 
   has n, :users, :through => Resource
 

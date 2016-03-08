@@ -786,7 +786,8 @@
   "trophies": [
     {
       "type": "VideosTrophy",
-      "name": "Learner - First video watched",
+      "name": "Learner",
+      "image": "//raw.githubusercontent.com/DAMS-Bale/flippd-trophies/master/1st-medal.png",
       "configuration": {
         "videos": 1
       }
@@ -801,6 +802,7 @@
     {
       "type": "CommentsTrophy",
       "name": "Young commenter",
+      "image": "//raw.githubusercontent.com/DAMS-Bale/flippd-trophies/master/star-medal.png",
       "configuration": {
         "comments": 1
       }
@@ -808,6 +810,7 @@
     {
       "type": "CommentsTrophy",
       "name": "Talk too much?",
+      "image": "//raw.githubusercontent.com/DAMS-Bale/flippd-trophies/master/5-stars.png",
       "configuration": {
         "comments": 5
       }
@@ -815,6 +818,7 @@
     {
       "type": "VideosGroupTrophy",
       "name": "Extensible Square Eyes",
+      "image": "//raw.githubusercontent.com/DAMS-Bale/flippd-trophies/master/star-cup.png",
       "configuration": {
         "videos": [
           "habitable-programs-extensibility-why-extensibility",
