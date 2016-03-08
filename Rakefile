@@ -14,7 +14,7 @@ end
 
 desc "Run the tests"
 task :test do
-  exec 'RACK_ENV=test CONFIG_URL=/vagrant/spec/ bundle exec rspec'
+  exec 'RACK_ENV=test CONFIG_URL=./spec/ bundle exec rspec'
 end
 
 desc "Start an interactive session with the database"
