@@ -44,7 +44,6 @@ class TrophiesManager
       trophy.configure(json_trophy['configuration'])
 
       # Updates the description of the trophy
-      puts(trophy.to_s)
       trophy.update(:description => trophy.to_s)
 
       # If the trophies has a personalised image, save it

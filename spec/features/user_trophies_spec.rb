@@ -20,7 +20,7 @@ feature "a user dashboard page trophies" do
 
     it "should have unlocked the Learner trophy" do
       expect(page).to have_content("Trophies: 1");
-      expect(page).to have_content("Learner - First video watched");
+      expect(page).to have_content("Learner");
       expect(page).to have_content("Watch at least 1 videos");
     end
 
@@ -33,7 +33,7 @@ feature "a user dashboard page trophies" do
       end
 
       it "should continue to show the Learner trophy" do
-          expect(page).to have_content("Learner - First video watched");
+          expect(page).to have_content("Learner");
           expect(page).to have_content("Watch at least 1 videos");
       end
 
