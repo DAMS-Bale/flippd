@@ -38,21 +38,21 @@ module Helpers
 
   def create_quiz
     return_val = {}
-    return_val[:quiz] = Quiz::create(
+    return_val[:quiz] = Quiz::first_or_create(
       :id      => 1,
       :name    => "My quiz"
     )
-    return_val[:question1] = Question::create(
+    return_val[:question1] = Question::first_or_create(
       :quiz   =>  return_val[:quiz],
       :text   =>  "What's my name?"
     )
-    return_val[:answer1_1] = Answer::create(
+    return_val[:answer1_1] = Answer::first_or_create(
       :id       => 1,
       :question => return_val[:question1],
       :text     => "Alice",
       :correct  => true
     )
-    return_val[:answer1_2] = Answer::create(
+    return_val[:answer1_2] = Answer::first_or_create(
       :id       => 2,
       :question => return_val[:question1],
       :text     => "Bob",
