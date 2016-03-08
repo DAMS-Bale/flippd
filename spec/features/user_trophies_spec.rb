@@ -11,7 +11,7 @@ feature "a user dashboard page trophies" do
     end
   end
 
-  context "after viewing a page" do
+  context "after viewing a video page" do
     before(:each) do
       visit('/videos/1')
       visit_dashboard
@@ -23,5 +23,67 @@ feature "a user dashboard page trophies" do
       expect(page).to have_content("Watch at least 1 videos");
     end
 
+    context "then viewing a further 3 video pages" do
+      before(:each) do
+        visit('/videos/2')
+        visit('/videos/3')
+        visit('/videos/4')
+        visit_dashboard
+      end
+
+      it "should continue to show the Learner trophy" do
+          expect(page).to have_content("Learner - First video watched");
+          expect(page).to have_content("Watch at least 1 videos");
+      end
+
+      it "should show the Studying hard trophy" do
+          expect(page).to have_content("Trophies: 2");
+          expect(page).to have_content("Studying hard");
+          expect(page).to have_content("Watch at least 4 videos");
+      end
+    end
+
+  end
+
+  context "after leaving a comment" do
+    before(:each) do
+      visit('/videos/1')
+      fill_in "Add a comment", with: "This is my comment"
+      click_on "Comment"
+      visit_dashboard
+    end
+
+    it "should show the Young commenter and Learner trophy" do
+      expect(page).to have_content("Trophies: 2");
+      expect(page).to have_content("Young commenter");
+      expect(page).to have_content("Write at least 1 comments");
+    end
+
+    context "after leaving a further 4 comments" do
+      before(:each) do
+        visit('/videos/1')
+        fill_in "Add a comment", with: "This is my comment 2"
+        click_on "Comment"
+        fill_in "Add a comment", with: "This is my comment 3"
+        click_on "Comment"
+        fill_in "Add a comment", with: "This is my comment 4"
+        click_on "Comment"
+        visit('/videos/2')
+        fill_in "Add a comment", with: "This is my comment 5"
+        click_on "Comment"
+        visit_dashboard
+      end
+
+      it "should show the Talk too much? trophy" do
+        expect(page).to have_content("Trophies: 3");
+        expect(page).to have_content("Talk too much?");
+        expect(page).to have_content("Write at least 5 comments");
+      end
+
+      it "should continue to show the Young commenter trophy" do
+        expect(page).to have_content("Young commenter");
+        expect(page).to have_content("Write at least 1 comments");
+      end
+    end
   end
 end
