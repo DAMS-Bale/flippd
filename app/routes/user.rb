@@ -18,6 +18,7 @@ class Flippd < Sinatra::Application
     @best_results = @results_user.best_results
 
     @video_views = @results_user.video_views
+    @user_trophys = @results_user.trophys
 
     erb :user
 

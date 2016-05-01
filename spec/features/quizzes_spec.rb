@@ -2,7 +2,7 @@ feature "A quiz" do
   before(:each) do
 
     @quiz = Quiz::create(
-      :id      => 1,
+      :id      => 3,
       :name    => "My quiz"
     )
 
@@ -148,15 +148,21 @@ feature "A quiz" do
       before(:each) do
         visit('/quiz/' + @quiz3.id.to_s)
       end
+
       it "single correct answer" do
         choose @answer3_1.id
         click_on "Mark"
-        #TODO Add expect condition
+        results = QuizResult.first
+        expect(results).to eq(nil)
+        expect(page).to have_content 'The results of your assessment 1/1'
       end
+
       it "single incorrect answer" do
         choose @answer3_2.id
         click_on "Mark"
-        #TODO Add expect condition
+        results = QuizResult.first
+        expect(results).to eq(nil)
+        expect(page).to have_content 'The results of your assessment 0/1'
       end
     end
   end

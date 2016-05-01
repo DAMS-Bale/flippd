@@ -22,6 +22,11 @@ class Flippd < Sinatra::Application
         end
       end
     end
+
+    # Instantiates the TrophiesManager and load the configuration
+    @trophies = TrophiesManager.new
+    @trophies.load_trophies @module['trophies']
+
   end
 
   get '/' do
